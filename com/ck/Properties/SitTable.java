@@ -4,10 +4,10 @@ import com.ck.domain.Customer;
 
 public class SitTable extends Thread{
     Table table;
-    Customer[] customer;
+    Customer customer;
     private int count;
 
-    public  SitTable(Table table, Customer[] customer ){
+    public  SitTable(Table table, Customer customer ){
         this.table = table;
         this.customer = customer;
         count++;
@@ -17,6 +17,7 @@ public class SitTable extends Thread{
     public void run() {
             System.out.println(this.getName() + "  before sit table number :" + table.getAvaibleNumberOftables() );
             table.sit(customer);
+            System.out.println(customer);
             System.out.println(this.getName() + "  after sit table number :" + table.getAvaibleNumberOftables() );
             count++;
             if (count == 14){

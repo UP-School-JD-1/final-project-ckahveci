@@ -1,5 +1,8 @@
 package com.ck;
 
+import com.ck.Order.Order;
+import com.ck.Order.PrepareOrder;
+import com.ck.Order.TakeOrder;
 import com.ck.Properties.FoodsAndDrinks;
 import com.ck.Properties.GetUpTable;
 import com.ck.Properties.SitTable;
@@ -30,24 +33,31 @@ public class Main {
 //        foodsAndDrinks.addFoods(bananaCake);
 //        Customer customer = new Customer();
 //        Order order1 = new Order(12,customer);
-
-        Customer c1 = new Customer();
-        Table tables = new Table(c1);
+        Table table = new Table();
         System.out.println();
+        Customer customer = new Customer(table);
 
-        SitTable[] st = new SitTable[4];
-        GetUpTable[] gt = new GetUpTable[4];
-        Customer[] customers = new Customer[30];
+//        SitTable[] st = new SitTable[4];
+//        GetUpTable[] gt = new GetUpTable[4];
+//
+//
+//        System.out.println(tables.getAvaibleNumberOftables());
+//
+//        for (int i = 0; i < 4; i++){
+//            st[i] = new SitTable(tables,customer);
+//            st[i].setName("SitTable: " + i);
+//            gt[i] = new GetUpTable(tables,customer);
+//            gt[i].setName("GetUpTable: " + i);
+//        }
+//        for (int i = 0; i < 4; i++){
+//            st[i].start();
+//            gt[i].start();
+//        }
+        Order order = new Order(customer);
+        TakeOrder to = new TakeOrder(order);
+        PrepareOrder po = new PrepareOrder(order);
+        to.start();
+        po.start();
 
-        for (int i = 0; i < 4; i++){
-            st[i] = new SitTable(tables,customers);
-            st[i].setName("SitTable: " + i);
-            gt[i] = new GetUpTable(tables,customers);
-            gt[i].setName("GetUpTable: " + i);
-        }
-        for (int i = 0; i < 4; i++){
-            st[i].start();
-            gt[i].start();
-        }
     }
 }

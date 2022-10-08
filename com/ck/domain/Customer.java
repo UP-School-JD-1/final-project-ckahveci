@@ -11,9 +11,9 @@ public class Customer {
     private Order order;
     private Table tables;
 
-//    public Customer(Order order, Tables tables) {
-//        this.order = order;
-//    }
+    public Customer( Table table) {
+        this.table = table;
+    }
 
     public Table getTable() {
         return table;

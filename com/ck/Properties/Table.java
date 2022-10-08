@@ -6,12 +6,15 @@ import com.ck.domain.Customer;
 public class Table {
     private int tableNumber;
     private int AvaibleNumberOftables = 14;
-    private boolean isAvaible;
+    private boolean flag = true;
     private Order order;
     private Customer customer;
 
-    public Table(Customer customer) {
-        this.customer = customer;
+//    public Table(Customer customer) {
+//        this.customer = customer;
+//    }
+    public Table(){
+
     }
 //    public Tables(int tableNumber, int numberOfSeats, boolean isAvaible) {
 //        this.tableNumber = tableNumber;
@@ -40,8 +43,8 @@ public class Table {
         return isAvaible();
     }
 
-    public void setBooked(boolean isAvaible) {
-        this.isAvaible = isAvaible;
+    public void setBooked(boolean flag) {
+        this.flag = flag;
     }
 
     public Order getOrder() {
@@ -56,41 +59,48 @@ public class Table {
     @Override
     public String toString() {
         return "table Number = " + tableNumber +
-                "\nnumber Of Seats=" + AvaibleNumberOftables +
-                "\nis Avaible=" + isAvaible;
+                "\nnumber Of Seats=" + AvaibleNumberOftables;
+
     }
 
     @Override
     public boolean equals(Object o) {
         Table tables = (Table) o;
         boolean bool = false;
-        if (tableNumber == tables.tableNumber && AvaibleNumberOftables == tables.AvaibleNumberOftables && isAvaible == tables.isAvaible)
+        if (tableNumber == tables.tableNumber && AvaibleNumberOftables == tables.AvaibleNumberOftables && flag == tables.flag)
             bool = true;
         return bool;
 
     }
 
-    public synchronized void getUp(Thread t, Customer[] customer) {
+    public synchronized void getUp(Thread t, Customer customer) {
         if (AvaibleNumberOftables >= 0 || AvaibleNumberOftables < 14) {
+
             try {
                 Thread.sleep(10);
+
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            AvaibleNumberOftables+= 1;
+           AvaibleNumberOftables+= 1;
         }
-        else{
+        if(AvaibleNumberOftables >= 14){
             try {
-                System.out.println("Custumer are waiting for a table");
-                System.out.println("All tables are full");
-                wait(100);
+                flag = false;
+                System.out.println("Waiting get up method");
+                wait();
+
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+            System.out.println("All tables are full");
+            System.out.println("Custumer are waiting for a table");
         }
-    }
-    public synchronized void sit(Customer[] customer) {
-        notify();
+
+        }
+
+    public synchronized void sit(Customer customer) {
         AvaibleNumberOftables-= 1;
-    }
+        notifyAll();
+        }
 }
