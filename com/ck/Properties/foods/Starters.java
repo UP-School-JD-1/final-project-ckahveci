@@ -1,21 +1,9 @@
 package com.ck.Properties.foods;
 
-public enum Starters {
-    TOMATO_SOUP ("Tomato Soup"),
-    FRENCH_ONION_SOUP ("French Onion Soup");
-
-    private String value;
-
-    Starters(String value) {
-        this.value = value;
+public class Starters extends Foods{
+    private final static String foodType = "Starters";
+    public Starters(String name, double price) {
+        super(name,Starters.foodType, price);
     }
 
-    public String getValue() {
-        return value;
-    }
-
-    @Override
-    public String toString() {
-        return this.getValue();
-    }
 }

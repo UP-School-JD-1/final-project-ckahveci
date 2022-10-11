@@ -10,10 +10,15 @@ public class PrepareOrder extends Thread{
     @Override
     public void run() {
         Order value;
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 2; i++) {
             value = order.prepareOrder();
-            System.out.println("Order taken from waiter to cook : " + value);
-
+            System.out.println("Order is cooking : " + value);
+            try {
+                Thread.sleep(1000);
+                System.out.println("Order is ready : " + value);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

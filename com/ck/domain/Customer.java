@@ -11,9 +11,8 @@ public class Customer {
     private Order order;
     private Table tables;
 
-    public Customer( Table table) {
-        this.table = table;
-    }
+    public Customer() {
+           }
 
     public Table getTable() {
         return table;
@@ -31,6 +30,4 @@ public class Customer {
         this.order = order;
     }
 
-    List<Customer> customerList= new ArrayList<>(4);
-
-}
+  }

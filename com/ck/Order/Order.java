@@ -9,9 +9,6 @@ public class Order {
     private int tableNumber;
     private Customer customer;
 
-    private List<FoodsAndDrinks> foodsAndDrinksList;
-
-    private List<Order> orderList;
     private boolean flag = true;
     private Order order;
 
@@ -32,25 +29,23 @@ public class Order {
         this.customer = customer;
     }
 
-    public List<FoodsAndDrinks> orderList(int tableNumber) {
-        return foodsAndDrinksList;
+    @Override
+    public String toString() {
+        return "Order" +
+                "customer=" + customer;
+    //            +"\norder=" + order.foodsAndDrinksList ;
     }
-    public List<Order> addOrder(Order order) {
-        orderList.add(order);
-        return orderList;
-    }
-    public List<Order> removeOrder(Order order) {
-        orderList.remove(order);
-        return orderList;
-    }
+
     public synchronized void takeOrder(Order order) {
         while (flag == true) {
             try {
+                Thread.sleep(100);
                 wait();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
+
         this.order = order;
         flag = true;
         notifyAll();
@@ -58,6 +53,7 @@ public class Order {
     public synchronized Order prepareOrder() {
         while (flag == false) {
             try {
+                Thread.sleep(100);
                 wait();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);

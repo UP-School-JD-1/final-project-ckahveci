@@ -1,8 +1,11 @@
 package com.ck.Properties.foods;
 
-public final class BananaCake extends Dessert {
+import com.ck.Properties.drinks.OrangeJuice;
 
-    public BananaCake(String name, String foodType, double price) {
-        super("Banana Cake", foodType, 2.29);
+public final class BananaCake extends Dessert {
+    private final static double price = 2.80;
+
+    public BananaCake() {
+        super("Banana Cake", BananaCake.price);
     }
 }

@@ -6,7 +6,6 @@ public final class OrangeJuice extends Drinks {
 
     public OrangeJuice() {
         super("Orange Juice", OrangeJuice.price);
-
     }
 
 }

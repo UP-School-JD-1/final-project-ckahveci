@@ -10,10 +10,10 @@ public class Table {
     private Order order;
     private Customer customer;
 
-//    public Table(Customer customer) {
+    //    public Table(Customer customer) {
 //        this.customer = customer;
 //    }
-    public Table(){
+    public Table() {
 
     }
 //    public Tables(int tableNumber, int numberOfSeats, boolean isAvaible) {
@@ -75,32 +75,28 @@ public class Table {
 
     public synchronized void getUp(Thread t, Customer customer) {
         if (AvaibleNumberOftables >= 0 || AvaibleNumberOftables < 14) {
-
             try {
                 Thread.sleep(10);
 
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-           AvaibleNumberOftables+= 1;
+            AvaibleNumberOftables += 1;
         }
-        if(AvaibleNumberOftables >= 14){
+        if (AvaibleNumberOftables >= 14) {
             try {
                 flag = false;
                 System.out.println("Waiting get up method");
                 wait();
-
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
             System.out.println("All tables are full");
             System.out.println("Custumer are waiting for a table");
         }
-
-        }
-
+    }
     public synchronized void sit(Customer customer) {
-        AvaibleNumberOftables-= 1;
+        AvaibleNumberOftables -= 1;
         notifyAll();
-        }
+    }
 }
