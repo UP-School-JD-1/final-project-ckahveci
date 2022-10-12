@@ -14,9 +14,9 @@ public class GetUpTable extends Thread {
 
     @Override
     public void run() {
+        System.out.println(this.getName() + "  before get up table number :" + table.getTableNumber());
         table.getUp(currentThread(),customer);
-            System.out.println(this.getName() + "  before get up table number :" + customer.getTable());
-            System.out.println(this.getName() + "  after get up table number :" + customer.getTable());
+        System.out.println(this.getName() + "  after get up table number :" + table.getTableNumber());
 
     }
 }

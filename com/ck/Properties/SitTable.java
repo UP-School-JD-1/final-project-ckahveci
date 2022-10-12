@@ -18,8 +18,8 @@ public class SitTable extends Thread {
 
     @Override
     public void run() {
-        System.out.println(this.getName() + "  before sit table number :" + this.getName());
+        System.out.println(this.getName() + "  before sit table number :" + table.getTableNumber());
         table.sit();
-        System.out.println(this.getName() + "  after sit table number :" + this.getName());
+        System.out.println(this.getName() + "  after sit table number :" + table.getTableNumber());
     }
 }

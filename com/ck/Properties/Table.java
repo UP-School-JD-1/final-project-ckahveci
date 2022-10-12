@@ -13,8 +13,8 @@ public class Table {
         this.tableNumber = tableNumber;
     }
 
-    public boolean isAvaible() {
-        return isAvaible();
+    public int getTableNumber() {
+        return tableNumber;
     }
 
     @Override
@@ -22,7 +22,6 @@ public class Table {
         return "table Number = " + tableNumber +
                 "\nnumber Of Seats=" + NumberOftables;
     }
-
     @Override
     public boolean equals(Object o) {
         Table tables = (Table) o;
@@ -34,19 +33,17 @@ public class Table {
     }
 
     public synchronized Customer sit() {
-        int i = Table.NumberOftables;
         while (isAvaible == false) {
             try {
                 wait();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            if (i == Table.NumberOftables) {
+            if (tableNumber == Table.NumberOftables) {
                 System.out.println("All tables are empty");
-            } else if (i == 0) {
+            } else if (tableNumber == 0) {
                 System.out.println("Restaurant is full!!");
             } else {
-                System.out.println(i);
             }
         }
         isAvaible = false;
@@ -55,7 +52,6 @@ public class Table {
     }
 
     public synchronized void getUp(Thread t, Customer customer) {
-        int i = Table.NumberOftables;
         while (isAvaible == true) {
             try {
                 wait();
@@ -63,7 +59,7 @@ public class Table {
                 throw new RuntimeException(e);
             }
          }
-        i++;
+        tableNumber++;
         isAvaible = true;
         notifyAll();
     }
