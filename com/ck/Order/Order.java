@@ -1,9 +1,6 @@
 package com.ck.Order;
 
-import com.ck.Properties.FoodsAndDrinks;
 import com.ck.domain.Customer;
-
-import java.util.List;
 
 public class Order {
     private int tableNumber;

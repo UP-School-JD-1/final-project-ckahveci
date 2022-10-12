@@ -1,6 +1,6 @@
 package com.ck.util;
 
-import com.ck.Properties.FoodsAndDrinks;
+import com.ck.Properties.Table;
 import com.ck.Properties.drinks.Drinks;
 import com.ck.Properties.drinks.MineralWater;
 import com.ck.Properties.drinks.OrangeJuice;
@@ -14,9 +14,10 @@ import java.util.Random;
 
 public class CollectionUtil {
     private static List<Customer> customerList;
-    private static List<FoodsAndDrinks> foodsAndDrinksList;
-    private static List<Foods> FoodsList;
-    private static List<Drinks> DrinksList;
+    private static List<Foods> foodsList;
+    private static List<Drinks> drinksList;
+    private static List orderList;
+    private static List<Table> tableList;
     private static Random random = new Random();
 
     static {
@@ -27,56 +28,79 @@ public class CollectionUtil {
     }
 
     static {
-        foodsAndDrinksList = new ArrayList<>();
+        orderList = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
-            foodsAndDrinksList.add(new FoodsAndDrinks());
+            orderList.add(new ArrayList<>());
+        }
+    }
+
+    static {
+        tableList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            tableList.add(new Table(i));
+        }
+    }
+
+    static {
+        customerList = new ArrayList<>();
+        for (int i = 0; i < 30; i++) {
+            customerList.add(new Customer());
         }
     }
 
     static {
         int a;
+        orderList = new ArrayList<>();
+        foodsList = new ArrayList<>();
+        drinksList = new ArrayList<>();
         for (int i = 1; i <= 20; i++) {
             a = random.nextInt(5 - 1 + 1) + 1;
-            System.out.println(random);
             if (a == 1) {
-                FoodsList.add(new BananaCake());
-                DrinksList.add(new OrangeJuice());
+                foodsList.add(new BananaCake());
+                drinksList.add(new OrangeJuice());
             } else if (a == 2) {
-                FoodsList.add(new GrilledFishAndPotatoes());
-                FoodsList.add(new FrenchOnionSoup());
+                foodsList.add(new GrilledFishAndPotatoes());
+                foodsList.add(new FrenchOnionSoup());
             } else if (a == 3) {
-                FoodsList.add(new TomatoSoup());
-                FoodsList.add(new GrilledFishAndPotatoes());
-                DrinksList.add(new MineralWater());
+                foodsList.add(new TomatoSoup());
+                foodsList.add(new GrilledFishAndPotatoes());
+                drinksList.add(new MineralWater());
             } else if (a == 4) {
-                FoodsList.add(new BananaCake());
-                DrinksList.add(new MineralWater());
+                foodsList.add(new BananaCake());
+                drinksList.add(new MineralWater());
             } else if (a == 5) {
-                FoodsList.add(new TomatoSoup());
-                FoodsList.add(new LemonCake());
-                DrinksList.add(new MineralWater());
+                foodsList.add(new TomatoSoup());
+                foodsList.add(new LemonCake());
+                drinksList.add(new MineralWater());
             }
-            FoodsAndDrinks foodsAndDrinks = new FoodsAndDrinks();
-            foodsAndDrinksList.add((FoodsAndDrinks) foodsAndDrinks.AddorderList(DrinksList, FoodsList, FoodsList));
+            orderList.add(drinksList);
+            orderList.add(foodsList);
         }
     }
 
     public static List<Customer> getCustomerList() {
         return customerList;
     }
+    public static List getorderList() {
+        return orderList;
+    }
 
+    public static List<Table> getTableList() {
+        return tableList;
+    }
     public static void listElementsOfCustomer() {
         ListIterator i = customerList.listIterator();
         while (i.hasNext())
             System.out.println(i.nextIndex() + ": " + i.next());
     }
-
-    public static List<FoodsAndDrinks> getFoodsAndDrinksList() {
-        return foodsAndDrinksList;
+    public static void listElementsOfTable() {
+        ListIterator i = tableList.listIterator();
+        while (i.hasNext())
+            System.out.println(i.nextIndex() + ": " + i.next());
     }
 
-    public static void listElementsOfFoodsAndDrinks() {
-        ListIterator i = foodsAndDrinksList.listIterator();
+    public static void listElementsOfOrderList() {
+        ListIterator i = orderList.listIterator();
         while (i.hasNext())
             System.out.println(i.nextIndex() + ": " + i.next());
     }
